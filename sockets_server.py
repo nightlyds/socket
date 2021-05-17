@@ -6,6 +6,7 @@ port = 4000
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind((host, port))
+s.listen()
 
 print("Server Started")
 
@@ -22,8 +23,8 @@ def check_for_user(data, addr):
 
     for i in addrs:
         s.sendto(data.encode('utf-8'), i)
-        time.sleep(.5)
 
 while True:
     data, addr = s.recvfrom(1024)
+    print(s.family)
     check_for_user(data, addr)
