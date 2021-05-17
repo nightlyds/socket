@@ -11,7 +11,6 @@ print("Server Started")
 addrs = []
 
 def check_for_user(data, addr):
-    addrs.append(addr)
     data = data.decode('utf-8')
 
     print("ADDRS: " + str(addrs))
@@ -25,5 +24,5 @@ def check_for_user(data, addr):
 
 while True:
     data, addr = s.recvfrom(1024)
-    print(s.family)
+    addrs.append(addr)
     check_for_user(data, addr)
