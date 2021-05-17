@@ -1,11 +1,23 @@
 import socket
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(('192.168.0.108', 55555))
-s.listen()
+def Main():
+   
+    host = '192.168.0.108' #Server ip
+    port = 4000
 
-while True:
-    client, address = s.accept()
-    print("Connected: {}".format(address))
-    client.send("You are connected!".encode())
-    client.close()
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind((host, port))
+
+    print("Server Started")
+    while True:
+        data, addr = s.recvfrom(1024)
+        data = data.decode('utf-8')
+        print("Message from: " + str(addr))
+        print("From connected user: " + data)
+        data = data.upper()
+        print("Sending: " + data)
+        s.sendto(data.encode('utf-8'), addr)
+    c.close()
+
+if __name__=='__main__':
+    Main()
