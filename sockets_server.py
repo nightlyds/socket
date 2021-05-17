@@ -10,10 +10,10 @@ print("Server Started")
 
 addrs = []
 
-while True:
-    data, addr = s.recvfrom(1024)
+def check_for_user(data, addr):
     addrs.append(addr)
     data = data.decode('utf-8')
+
     print("Message from: " + str(addr))
     print("From connected user: " + data)
     data = data.upper()
@@ -21,3 +21,7 @@ while True:
 
     for i in addrs:
         s.sendto(data.encode('utf-8'), i)
+
+while True:
+    data, addr = s.recvfrom(1024)
+    check_for_user(data, addr)
