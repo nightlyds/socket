@@ -1,23 +1,23 @@
 import socket
 
-def Main():
-   
-    host = '192.168.0.108' #Server ip
-    port = 4000
+host = "192.168.0.108" # Server IP
+port = 4000
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.bind((host, port))
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.bind((host, port))
 
-    print("Server Started")
-    while True:
-        data, addr = s.recvfrom(1024)
-        data = data.decode('utf-8')
-        print("Message from: " + str(addr))
-        print("From connected user: " + data)
-        data = data.upper()
-        print("Sending: " + data)
-        s.sendto(data.encode('utf-8'), addr)
-    c.close()
+print("Server Started")
 
-if __name__=='__main__':
-    Main()
+addrs = []
+
+while True:
+    data, addr = s.recvfrom(1024)
+    addrs.append(addr)
+    data = data.decode('utf-8')
+    print("Message from: " + str(addr))
+    print("From connected user: " + data)
+    data = data.upper()
+    print("Sending: " + data)
+
+    for i in addrs:
+        s.sendto(data.encode('utf-8'), i)
