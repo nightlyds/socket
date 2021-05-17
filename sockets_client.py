@@ -12,21 +12,26 @@ for opt, arg in opts:
     if opt == "-p":
         port = int(arg)
 
-server = ('192.168.0.108', 4000)
+server = ('127.0.0.1', 4000)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind((host, port))
 
 def write_message():
+    message = ""
+    if not message:
+        message = input("Type your name: ")
+        s.sendto(message.encode('utf-8'), server)
+
     while True:
-        message = input("-> ")
+        message = input("")
         s.sendto(message.encode('utf-8'), server)
 
 def get_message():
     while True:
         data, addr = s.recvfrom(1024)
         data = data.decode('utf-8')
-        print("Received from server: " + data)
+        print(data)
 
 
 f1 = threading.Thread(target=write_message)
