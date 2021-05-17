@@ -1,4 +1,5 @@
 import socket
+import asyncio
 
 host = "192.168.0.108" # Server IP
 port = 4000
@@ -11,7 +12,7 @@ print("Server Started")
 
 addrs = []
 
-def check_for_user(data, addr):
+async def check_for_user(data, addr):
     addrs.append(addr)
     data = data.decode('utf-8')
 
@@ -21,7 +22,8 @@ def check_for_user(data, addr):
     print("Sending: " + data)
 
     for i in addrs:
-        s.sendto(data.encode('utf-8'), i)
+        task = asyncio.Task(s.sendto(data.encode('utf-8'), i))
+        await task
 
 while True:
     data, addr = s.recvfrom(1024)
