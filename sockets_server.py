@@ -1,4 +1,5 @@
 import socket
+import time
 
 host = "192.168.0.108" # Server IP
 port = 4000
@@ -21,6 +22,7 @@ def check_for_user(data, addr):
 
     for i in addrs:
         s.sendto(data.encode('utf-8'), i)
+        time.sleep(.5)
 
 while True:
     data, addr = s.recvfrom(1024)

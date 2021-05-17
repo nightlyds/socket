@@ -2,6 +2,7 @@ import sys
 import getopt
 import socket
 import threading
+import time
 
 host = "192.168.0.104" # Client IP
 port = 4001 # By default
@@ -21,6 +22,7 @@ def write_message():
     while True:
         message = input("-> ")
         s.sendto(message.encode('utf-8'), server)
+        time.sleep(.5)
 
 def get_message():
     while True:
