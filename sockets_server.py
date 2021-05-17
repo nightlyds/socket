@@ -14,7 +14,7 @@ def check_for_user(data, addr):
     addrs.append(addr)
     data = data.decode('utf-8')
 
-    print(f"ADDRS: {addrs}")
+    print("ADDRS: " + str(addrs))
     print("Message from: " + str(addr))
     print("From connected user: " + data)
     data = data.upper()
