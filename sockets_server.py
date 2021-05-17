@@ -24,5 +24,6 @@ def check_for_user(data, addr):
 
 while True:
     data, addr = s.recvfrom(1024)
-    addrs.append(addr)
+    if addr not in addrs:
+        addrs.append(addr)
     check_for_user(data, addr)
