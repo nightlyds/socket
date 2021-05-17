@@ -4,7 +4,7 @@ import asyncio
 host = "192.168.0.108" # Server IP
 port = 4000
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind((host, port))
 s.listen()
 

@@ -15,7 +15,7 @@ for opt, arg in opts:
 
 server = ('192.168.0.108', 4000)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind((host, port))
 
 async def write_message():
