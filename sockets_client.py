@@ -2,7 +2,6 @@ import sys
 import getopt
 import socket
 import threading
-import asyncio
 
 host = "192.168.0.104" # Client IP
 port = 4001 # By default
@@ -18,11 +17,10 @@ server = ('192.168.0.108', 4000)
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind((host, port))
 
-async def write_message():
+def write_message():
     while True:
         message = input("-> ")
-        task = asyncio.Task(s.sendto(message.encode('utf-8'), server))
-        await task
+        s.sendto(message.encode('utf-8'), server)
 
 def get_message():
     while True:
